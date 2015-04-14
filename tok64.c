@@ -15,15 +15,16 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
 #define MAXLINE 402
 
-#include "\c\lib\getprog.h"
-#include "\c\lib\getline.h"
-#include "\c\lib\basename.h"
-#include "\c\lib\rtc.h"
+#include "getprog.h"
+#include "getline.h"
+#include "basename.h"
+#include "rtc.h"
 
 #define PROGNAME "TOK64"
 #define VERSION "1.4"
@@ -215,10 +216,10 @@ Keyword_type special [] =
    "{pink}", 0x96,       "{dark gray}", 0x97,
    "{gray}", 0x98,       "{light green}", 0x99,
    "{light blue}", 0x9A, "{light gray}", 0x9B,
-	 "{f1}", 0x85,         "{f2}", 0x89,
-	 "{f3}", 0x86,         "{f4}", 0x8A,
-	 "{f5}", 0x87,         "{f6}", 0x8B,
-	 "{f7}", 0x88,         "{f8}", 0x8C,
+   "{f1}", 0x85,         "{f2}", 0x89,
+   "{f3}", 0x86,         "{f4}", 0x8A,
+   "{f5}", 0x87,         "{f6}", 0x8B,
+   "{f7}", 0x88,         "{f8}", 0x8C,
    "{space}", SPACE,
    "", 0
 };
@@ -682,7 +683,7 @@ void txt2prg (FILE *in, FILE *out, int casemode, int colmode)
    tokenize (BASREC_NULL, CH_NULL, TRUE, FALSE);
    start_prg (out);
 
-   while (getline (line, MAXLINE, in) != EOF)
+   while (getline2 (line, MAXLINE, in) != EOF)
    {
       if (colmode)
 			{
@@ -752,7 +753,7 @@ void process_mult (FILE *in, int overwrite, int casemode, int colmode)
    char file_out [MAXPATH], casetext [MAXLINE], fext [MAXEXT];
    FILE *out;
 
-   while (getline (line, MAXLINE, in) != EOF)
+   while (getline2 (line, MAXLINE, in) != EOF)
    {
       i = 0;
       eol = strlen (line);
